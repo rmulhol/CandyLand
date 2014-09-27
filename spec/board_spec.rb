@@ -7,10 +7,6 @@ describe Board do
   let(:board_with_colors) { new_board.insert_colors_into_spaces(empty_board, colors) }
   
   describe "#make_100_spaces" do
-    it "makes an array" do
-      expect(new_board.make_100_spaces.class).to eq(Array)
-    end
-
     it "makes an array with subarrays" do
       expect(new_board.make_100_spaces).to include([])  
     end
@@ -21,22 +17,20 @@ describe Board do
   end
   
   describe "#make_6_colors" do
-    it "makes an array" do
-      expect(new_board.make_6_colors.class).to eq(Array)
-    end
-
     it "makes an array with six elements" do
-      expect(new_board.make_6_colors.length).to eq(6)
+      colors = new_board.make_6_colors
+      
+      expect(colors.length).to eq(6)
     end
 
-    it "makes an array with six colors" do
-      expect(new_board.make_6_colors).to include("yellow", "blue", "green", "pink", "red", "orange")
+    it "includes each of the colors as an element" do
+      colors = "yellow", "blue", "green", "pink", "red", "orange"
+      expect(new_board.make_6_colors).to include(*colors)
     end
   end
 
   describe "#insert_colors_into_spaces" do
     it "creates an array with 100 spaces" do
-      expect(board_with_colors.class).to eq(Array)
       expect(board_with_colors.length).to eq(100)
     end
     
@@ -46,89 +40,104 @@ describe Board do
 
     it "fills every empty array with a color" do
       colors = new_board.make_6_colors
-      expect(board_with_colors.map { |space| colors.include? space[0] }).not_to include(false)
+      includes_colors = board_with_colors.map { |space| colors.include? space[0] }
+      
+      expect(includes_colors).not_to include(false)
     end
 
     it "fills every empty array with different colors" do
       my_board = board_with_colors
-      expect((1..99).to_a.map { |index| my_board[index] == my_board[index - 1] }).to include(false)
+      includes_variance = (1..99).to_a.map { |index| my_board[index] == my_board[index - 1] }
+      
+      expect(includes_variance).to include(false)
     end
   end
 
   describe "#separate_pink_spaces" do
-    it "returns an array" do
-      expect(new_board.separate_pink_spaces(board_with_colors).class).to eq(Array)
-    end
-
     it "returns an array with only pink spaces" do
-      expect(new_board.separate_pink_spaces(board_with_colors).map { |element| element.include? "pink" }).not_to include(false)
+      exclusively_pink = new_board.separate_pink_spaces(board_with_colors).map { |element| element.include? "pink" }
+
+      expect(exclusively_pink).not_to include(false)
     end
   end
 
   describe "#add_candycanes_and_gumdrops" do
+    let(:pink_spaces) { new_board.add_candycanes_and_gumdrops(board_with_colors) }
+    
     it "adds an element to every pink space" do
-      expect(new_board.add_candycanes_and_gumdrops(board_with_colors).map { |element| element.length == 2 }).not_to include(false)
+      includes_more_than_pink = pink_spaces.map { |element| element.length == 2 }
+      
+      expect(includes_more_than_pink).not_to include(false)
     end
 
     it "adds candycanes to pink spaces" do
-      expect(new_board.add_candycanes_and_gumdrops(board_with_colors).map { |element| element.include? "candycane" }).to include(true)
+      includes_candycanes = pink_spaces.map { |element| element.include? "candycane" }
+      
+      expect(includes_candycanes).to include(true)
     end
 
     it "adds gumdrops to pink spaces" do
-      expect(new_board.add_candycanes_and_gumdrops(board_with_colors).map { |element| element.include? "gumdrop" }).to include(true)
+      includes_gumdrops = pink_spaces.map { |element| element.include? "gumdrop" }
+      
+      expect(includes_gumdrops).to include(true)
     end
   end
 
   describe "#separate_non_pink_spaces" do
-    it "returns an array" do
-      expect(new_board.separate_non_pink_spaces(board_with_colors).class).to eq(Array)
-    end
-
     it "returns an array without pink spaces" do
-      expect(new_board.separate_non_pink_spaces(board_with_colors).map { |element| element.include? "pink"}).not_to include(true)
+      no_pink_spaces = new_board.separate_non_pink_spaces(board_with_colors)
+      does_not_include_pink_spaces = no_pink_spaces.map { |element| element.include? "pink"}
+
+      expect(does_not_include_pink_spaces).not_to include(true)
     end
   end
 
   describe "#add_sticky_spaces" do
-    it "returns an array" do
-      expect(new_board.add_sticky_spaces(board_with_colors).class).to eq(Array)
-    end
-
     it "doesn't include any pink spaces" do
-      expect(new_board.add_sticky_spaces(board_with_colors).map { |element| element.include? "pink" }).not_to include(true)
+      no_pink_spaces = new_board.add_sticky_spaces(board_with_colors)
+      does_not_include_pink_spaces = no_pink_spaces.map { |element| element.include? "pink" }
+
+      expect(does_not_include_pink_spaces).not_to include(true)
     end
 
     it "adds sticky to spaces" do
-      expect(new_board.add_sticky_spaces(board_with_colors).map { |element| element.include? "sticky" }).to include(true)
+      board_with_sticky_spaces = new_board.add_sticky_spaces(board_with_colors)
+      yes_sticky_spaces = board_with_sticky_spaces.map { |element| element.include? "sticky" }
+
+      expect(yes_sticky_spaces).to include(true)
     end
 
     it "adds sticky to five spaces" do
-      expect(new_board.add_sticky_spaces(board_with_colors).select { |element| element.include? "sticky" }.length).to eq(5)
+      board_with_sticky_spaces = new_board.add_sticky_spaces(board_with_colors)
+      five_sticky_spaces = board_with_sticky_spaces.select { |element| element.include? "sticky" }
+      
+      expect(five_sticky_spaces.length).to eq(5)
     end
   end
 
   describe "#complete_board" do
     let(:pink_spaces) { new_board.add_candycanes_and_gumdrops(board_with_colors) }
     let(:non_pink_spaces) { new_board.add_sticky_spaces(board_with_colors) }
+    let(:final_board) { new_board.complete_board(pink_spaces, non_pink_spaces) }
     
-    it "returns an array" do
-      expect(new_board.complete_board(pink_spaces, non_pink_spaces).class).to eq(Array)
-    end
-
     it "has 100 spaces" do
-      expect(new_board.complete_board(pink_spaces, non_pink_spaces).length).to eq(100)
+      expect(final_board.length).to eq(100)
     end
 
     it "has five sticky spaces" do
-      expect(new_board.complete_board(pink_spaces, non_pink_spaces).select { |element| element.include? "sticky" }.length).to eq(5)
+      five_sticky_spaces = final_board.select { |element| element.include? "sticky" }
+      
+      expect(five_sticky_spaces.length).to eq(5)
     end
 
     it "attaches candycane or gumdrop to every pink space" do
-      complete_board = new_board.complete_board(pink_spaces, non_pink_spaces)
-      pink_spaces = complete_board.select { |element| element.include? "pink" }
+      pink_spaces = final_board.select { |element| element.include? "pink" }
+      amount_of_pink_spaces = pink_spaces.length
       pink_spaces_with_candycanes = pink_spaces.select { |element| element.include? "candycane" }
       pink_spaces_with_gumdrops = pink_spaces.select { |element| element.include? "gumdrop" }
-      expect(pink_spaces_with_candycanes.length + pink_spaces_with_gumdrops.length).to eq(pink_spaces.length)
+      amount_of_pink_spaces_with_candycanes_and_gumdrops = pink_spaces_with_candycanes.length + pink_spaces_with_gumdrops.length
+
+      expect(amount_of_pink_spaces).to eq(amount_of_pink_spaces_with_candycanes_and_gumdrops)
     end
   end
 end

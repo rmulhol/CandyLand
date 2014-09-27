@@ -5,6 +5,6 @@ class Deck
   end
 
   def make_pink_cards
-   array =  Array.new(8, ["pink"])
+   Array.new(8, ["pink"])
   end
 end
