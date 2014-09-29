@@ -64,80 +64,6 @@ describe Deck do
 #   end
 # end
 
-# describe "#make_4_pink_cards" do
-#   it "makes 4 cards" do
-#     expect(pink_cards.length).to eq(4)
-#   end
-
-#   it "gives each card a 'pink' string" do
-#     test_cards_are_pink = pink_cards.map { |card| card.include? "pink" }
-#     
-#     expect(test_cards_are_pink).not_to include(false)
-#   end
-# end
-
-# describe "#give_4_pink_cards_candycanes" do
-#   let(:includes_candycanes) { new_deck.give_4_pink_cards_candycanes }
-#   
-#   it "outputs an array with 4 cards" do
-#     test_four_cards = includes_candycanes.length
-
-#     expect(test_four_cards).to eq(4)
-#   end
-
-#   it "outputs an array containing only pink cards" do
-#     test_cards_are_pink = includes_candycanes.map { |card| card.include? "pink" }
-
-#     expect(test_cards_are_pink).not_to include(false)
-#   end
-
-#   it "outputs an array where every element contains 'candycane'" do
-#     test_cards_include_candycanes = includes_candycanes.map { |card| card.include? "candycane" }
-
-#     expect(test_cards_include_candycanes).not_to include(false)
-#   end
-# end
-
-# describe "give_4_pink_cards_gumdrops" do
-#   let(:includes_gumdrops) { new_deck.give_4_pink_cards_gumdrops }
-
-#   it "outputs an array with 4 cards" do
-#     test_four_cards = includes_gumdrops.length
-
-#     expect(test_four_cards).to eq(4)
-#   end
-
-#   it "outputs an array containing only pink cards" do
-#     test_cards_are_pink = includes_gumdrops.map { |card| card.include? "pink" }
-
-#     expect(test_cards_are_pink).not_to include(false)
-#   end
-
-#   it "outputs an array where every element contains 'gumdrop'" do
-#     test_cards_include_gumdrops = includes_gumdrops.map { |card| card.include? "gumdrop" }
-
-#     expect(test_cards_include_gumdrops).not_to include(false)
-#   end
-# end
-
-# describe "add_reverse_to_2_cards" do
-#   let(:four_cards) { Array.new(4) { [] } }
-#   let(:test_add_reverse_output) { new_deck.add_reverse_to_2_cards(four_cards) }
-#   
-#   it "outputs an array with 4 cards" do
-#     test_output_length = test_add_reverse_output.length
-
-#     expect(test_output_length).to eq(4)
-#   end
-
-#   it "adds 'reverse' to 2 of the cards" do
-#     cards_with_reverse = test_add_reverse_output.map { |card| card.include? "reverse" }
-#     count_of_cards_with_reverse = cards_with_reverse.count(true)
-
-#     expect(count_of_cards_with_reverse).to eq(2)
-#   end
-# end
-
 # describe "#make_5_colors" do
 #   it "creates an array with 5 non-pink colors" do
 #     colors = ["yellow", "blue", "green", "red", "orange"]
@@ -179,6 +105,36 @@ describe Deck do
 #     end
 
 #     expect(includes_variance).to include(true)
+#   end
+# end
+
+# describe "#make_4_pink_cards" do
+#   it "makes 4 cards" do
+#     expect(pink_cards.length).to eq(4)
+#   end
+
+#   it "gives each card a 'pink' string" do
+#     test_cards_are_pink = pink_cards.map { |card| card.include? "pink" }
+#     
+#     expect(test_cards_are_pink).not_to include(false)
+#   end
+# end
+
+# describe "add_reverse_to_2_cards" do
+#   let(:four_cards) { Array.new(4) { [] } }
+#   let(:test_add_reverse_output) { new_deck.add_reverse_to_2_cards(four_cards) }
+#   
+#   it "outputs an array with 4 cards" do
+#     test_output_length = test_add_reverse_output.length
+
+#     expect(test_output_length).to eq(4)
+#   end
+
+#   it "adds 'reverse' to 2 of the cards" do
+#     cards_with_reverse = test_add_reverse_output.map { |card| card.include? "reverse" }
+#     count_of_cards_with_reverse = cards_with_reverse.count(true)
+
+#     expect(count_of_cards_with_reverse).to eq(2)
 #   end
 # end
 end
