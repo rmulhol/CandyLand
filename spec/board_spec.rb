@@ -60,6 +60,19 @@ describe Board do
     end
   end
 
+ describe "#make_6_colors" do
+   it "makes an array with six elements" do
+     colors = new_board.make_6_colors
+     
+     expect(colors.length).to eq(6)
+   end
+
+   it "includes each of the colors as an element" do
+     colors = "yellow", "blue", "green", "pink", "red", "orange"
+     expect(new_board.make_6_colors).to include(*colors)
+   end
+ end
+
 # let(:empty_board) { new_board.make_100_spaces }
 # let(:colors) { new_board.make_6_colors }
 # let(:board_with_colors) { new_board.insert_colors_into_spaces(empty_board, colors) }
@@ -74,19 +87,6 @@ describe Board do
 #   end
 # end
 # 
-# describe "#make_6_colors" do
-#   it "makes an array with six elements" do
-#     colors = new_board.make_6_colors
-#     
-#     expect(colors.length).to eq(6)
-#   end
-
-#   it "includes each of the colors as an element" do
-#     colors = "yellow", "blue", "green", "pink", "red", "orange"
-#     expect(new_board.make_6_colors).to include(*colors)
-#   end
-# end
-
 # describe "#insert_colors_into_spaces" do
 #   it "creates an array with 100 spaces" do
 #     expect(board_with_colors.length).to eq(100)
