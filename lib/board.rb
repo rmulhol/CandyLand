@@ -9,9 +9,7 @@ class Board
   end
 
   def make_100_spaces
-    new_array = []
-    100.times { new_array << [] }
-    new_array
+    Array.new(100) { [] }
   end
 
   def make_6_colors
