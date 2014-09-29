@@ -10,6 +10,8 @@ class Deck
     complete_deck.shuffle
   end
 
+  private
+
   def make_56_spaces
     Array.new(56) { [] }
   end
