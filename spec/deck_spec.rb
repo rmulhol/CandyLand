@@ -119,22 +119,4 @@ describe Deck do
 #     expect(test_cards_are_pink).not_to include(false)
 #   end
 # end
-
-# describe "add_reverse_to_2_cards" do
-#   let(:four_cards) { Array.new(4) { [] } }
-#   let(:test_add_reverse_output) { new_deck.add_reverse_to_2_cards(four_cards) }
-#   
-#   it "outputs an array with 4 cards" do
-#     test_output_length = test_add_reverse_output.length
-
-#     expect(test_output_length).to eq(4)
-#   end
-
-#   it "adds 'reverse' to 2 of the cards" do
-#     cards_with_reverse = test_add_reverse_output.map { |card| card.include? "reverse" }
-#     count_of_cards_with_reverse = cards_with_reverse.count(true)
-
-#     expect(count_of_cards_with_reverse).to eq(2)
-#   end
-# end
 end
